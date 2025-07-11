@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Logo } from "@/components/ui/logo"
 import { useTranslation } from "@/lib/translations"
+import { Linkedin, Github } from "lucide-react"
 
 interface FooterProps {
   locale?: string
@@ -24,13 +25,19 @@ export function Footer({ locale = "pt" }: FooterProps) {
             <p className="text-gray-400 max-w-md mb-6">{t("footerDescription")}</p>
             <div className="flex space-x-4">
               <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-orange-500 hover:to-yellow-500 transition-all cursor-pointer">
-                <span className="text-sm">𝕏</span>
+                <span className="text-lg">
+                  𝕏
+                </span>
               </div>
               <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-orange-500 hover:to-yellow-500 transition-all cursor-pointer">
-                <span className="text-sm">in</span>
+                <span className="text-lg">
+                  <Linkedin className="h-5 w-5 text-white" />
+                </span>
               </div>
               <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gradient-to-r hover:from-orange-500 hover:to-yellow-500 transition-all cursor-pointer">
-                <span className="text-sm">gh</span>
+                <span className="text-lg">
+                  <Github className="h-5 w-5 text-white" />
+                </span>
               </div>
             </div>
           </div>
