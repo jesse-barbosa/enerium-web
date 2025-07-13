@@ -1,9 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { EnergyParticles } from "@/components/ui/energy-particles"
-import { EnergyOrbs } from "@/components/ui/energy-orbs"
-import { ArrowRight, Play, TrendingDown, Zap, Factory, Bot, LineChart } from "lucide-react"
+import { ArrowRight, Play, TrendingDown, Zap } from "lucide-react"
 import { useTranslation } from "@/lib/translations"
 
 interface HeroSectionProps {
@@ -16,13 +14,17 @@ export function HeroSection({ locale = "pt" }: HeroSectionProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Dynamic gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-yellow-100/30 to-orange-200/20" />
+      <div className="absolute inset-0" />
 
-      {/* Energy particles animation */}
-      <EnergyParticles />
-
-      {/* Energy orbs and effects */}
-      <EnergyOrbs />
+      {/* Background image */}
+      <div className="absolute top-0 inset-0 -z-10">
+        <img
+          src="/images/casa-candelaria.jpg"
+          alt="Casa Candelaria"
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0" />
+      </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="max-w-6xl mx-auto">
@@ -41,7 +43,7 @@ export function HeroSection({ locale = "pt" }: HeroSectionProps) {
 
           {/* Subtitle */}
           <p
-            className="text-xl sm:text-2xl md:text-3xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed animate-fade-in-up"
+            className="text-xl sm:text-2xl md:text-3xl text-white mb-12 max-w-4xl mx-auto leading-relaxed animate-fade-in-up"
             style={{ animationDelay: "0.2s" }}
           >
             {t("heroSubtitle")}
@@ -70,41 +72,6 @@ export function HeroSection({ locale = "pt" }: HeroSectionProps) {
             </Button>
           </div>
 
-          {/* Key benefits */}
-          <div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto animate-fade-in-up"
-            style={{ animationDelay: "0.6s" }}
-          >
-            {[
-              {
-                icon: <Factory className="h-10 w-10 text-orange-600" />,
-                title: locale === "pt" ? "Indústrias & Data Centers" : "Industries & Data Centers",
-                gradient: "from-orange-100 to-orange-50 border-orange-200",
-              },
-              {
-                icon: <Bot className="h-10 w-10 text-yellow-600" />,
-                title: locale === "pt" ? "Automação Inteligente" : "Smart Automation",
-                gradient: "from-yellow-100 to-yellow-50 border-yellow-200",
-              },
-              {
-                icon: <LineChart className="h-10 w-10 text-orange-600" />,
-                title: locale === "pt" ? "Analytics em Tempo Real" : "Real-time Analytics",
-                gradient: "from-orange-100 to-orange-50 border-orange-200",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className={`bg-gradient-to-br ${item.gradient} rounded-3xl p-6 border shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 backdrop-blur-md`}
-              >
-                <div className="flex flex-col items-center text-center space-y-4">
-                  <div className="p-4 bg-white/80 rounded-full shadow-inner">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
