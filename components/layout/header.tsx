@@ -18,6 +18,7 @@ export function Header({ locale = "pt", onLocaleChange }: HeaderProps) {
   const { t } = useTranslation(locale)
 
   const navigationItems = [
+    { label: t("home"), href: "/" },
     { label: t("pricing"), href: "/pricing" },
     { label: t("products"), href: "/products" },
     { label: t("blog"), href: "/blog" },

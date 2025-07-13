@@ -3,6 +3,7 @@ import type { Translations } from "@/types"
 export const translations: Translations = {
     pt: {
     // Navigation
+    home: "Início",
     pricing: "Preços",
     products: "Produtos",
     blog: "Blog",
@@ -45,6 +46,7 @@ export const translations: Translations = {
   },
   en: {
     // Navigation
+    home: "Home",
     pricing: "Pricing",
     products: "Products",
     blog: "Blog",
