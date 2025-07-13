@@ -6,7 +6,7 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Enerium - Intelligent Energy Management and Optimization",
+  title: "Enerium",
   description: "Reduce energy costs by up to 40% with AI-powered consumption analysis and automated optimization for industrial and commercial buildings.",
   keywords: [
     "energy management",
