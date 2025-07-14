@@ -1,14 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { Header } from "@/components/layout/header"
-import { HeroSection } from "@/components/sections/hero"
-import { FeaturesSection } from "@/components/sections/features"
-import { StatsSection } from "@/components/sections/stats"
-import { TestimonialsSection } from "@/components/sections/testimonials"
-import { PricingSection } from "@/components/sections/pricing"
-import { CTASection } from "@/components/sections/cta"
-import { Footer } from "@/components/layout/footer"
+import { Header } from "@/components/intro-layout/header"
+import { HeroSection } from "@/components/intro-sections/hero"
+import { FeaturesSection } from "@/components/intro-sections/features"
+import { StatsSection } from "@/components/intro-sections/stats"
+import { TestimonialsSection } from "@/components/intro-sections/testimonials"
+import { PricingSection } from "@/components/intro-sections/pricing"
+import { CTASection } from "@/components/intro-sections/cta"
+import { Footer } from "@/components/intro-layout/footer"
 
 export default function HomePage() {
   const [locale, setLocale] = useState("pt")
