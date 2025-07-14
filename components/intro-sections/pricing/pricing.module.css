@@ -1,0 +1,22 @@
+.card {
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  cursor: pointer;
+}
+
+.card-left {
+  transform: perspective(1000px) rotateY(12deg);
+}
+
+.card-left:hover {
+  transform: perspective(1000px) rotateY(16deg) scale(1.05) translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-right {
+  transform: perspective(1000px) rotateY(-12deg);
+}
+
+.card-right:hover {
+  transform: perspective(1000px) rotateY(-16deg) scale(1.05) translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}

@@ -6,7 +6,7 @@ import { HeroSection } from "@/components/intro-sections/hero"
 import { FeaturesSection } from "@/components/intro-sections/features"
 import { StatsSection } from "@/components/intro-sections/stats"
 import { TestimonialsSection } from "@/components/intro-sections/testimonials"
-import { PricingSection } from "@/components/intro-sections/pricing"
+import { PricingSection } from "@/components/intro-sections/pricing/pricing"
 import { CTASection } from "@/components/intro-sections/cta"
 import { Footer } from "@/components/intro-layout/footer"
 

@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button"
 import { Check, Zap } from "lucide-react"
 import { useTranslation } from "@/lib/translations"
+import { cn } from "@/lib/utils"
+import styles from "./pricing.module.css"
 
 interface PricingSectionProps {
   locale?: string
@@ -113,15 +115,19 @@ export function PricingSection({ locale = "pt" }: PricingSectionProps) {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">{t("pricingSubtitle")}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-1 max-w-6xl mx-auto">
           {currentPlans.map((plan, index) => (
             <div
               key={index}
-              className={`relative p-8 rounded-2xl border-2 transition-all duration-500 hover:-translate-y-3 ${
+              className={cn(
+                styles.card,
+                index === 0 && styles["card-left"],
+                index === 2 && styles["card-right"],
+                "relative p-8 rounded-2xl border-2 transition-all duration-500 hover:-translate-y-3",
                 plan.popular
                   ? "border-orange-400 bg-gradient-to-br from-orange-50 to-yellow-50 shadow-2xl scale-105"
                   : "border-orange-200 bg-white hover:border-orange-300 hover:shadow-xl"
-              }`}
+              )}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
