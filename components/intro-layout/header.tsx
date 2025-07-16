@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Menu, X, ChevronDown, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -15,6 +15,7 @@ interface HeaderProps {
 
 export function Header({ locale = "pt", onLocaleChange }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const { t } = useTranslation(locale)
 
   const navigationItems = [
@@ -35,96 +36,114 @@ export function Header({ locale = "pt", onLocaleChange }: HeaderProps) {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY
+      setScrolled(offset > 50) // Ajuste o valor conforme necessário
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   return (
-    <header className="fixed top-0 z-50 w-full shadow bg-white/10 backdrop-blur supports-[backdrop-filter]:bg-white/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <Logo />
-          </Link>
+    <div className="w-full flex justify-center items-center">
+      <header
+        className={`fixed z-50 transition-all duration-300 ${
+          scrolled
+            ? "top-4 mx-auto w-full max-w-6xl rounded-xl shadow bg-white/70 backdrop-blur"
+            : "top-0 w-full shadow bg-white/10 backdrop-blur"
+        } supports-[backdrop-filter]:bg-white/30`}
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex-shrink-0">
+              <Logo />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* Language Selector */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-gray-700 hover:text-orange-600">
-                  <Globe className="mr-1 h-4 w-4" />
-                  {locale.toUpperCase()}
-                  <ChevronDown className="ml-1 h-3 w-3" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                {languages.map((language) => (
-                  <DropdownMenuItem
-                    key={language.code}
-                    onClick={() => onLocaleChange?.(language.code)}
-                    className="cursor-pointer"
-                  >
-                    <span className="mr-2">{language.flag}</span>
-                    {language.label}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <Button variant="ghost" size="sm" className="hover:text-orange-600">
-              {t("bookDemo")}
-            </Button>
-            <Button
-              size="sm"
-              className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 shadow-lg"
-            >
-              {t("signUp")}
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <Button variant="ghost" size="sm" className="md:hidden" onClick={toggleMobileMenu}>
-            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-orange-200 py-4">
-            <nav className="flex flex-col space-y-4">
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
               {navigationItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className="text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
-              <div className="flex flex-col space-y-2 pt-4 border-t border-orange-200">
-                <Button variant="ghost" size="sm" className="justify-start hover:text-orange-600">
-                  {t("bookDemo")}
-                </Button>
-                <Button size="sm" className="justify-start bg-gradient-to-r from-orange-500 to-yellow-500">
-                  {t("signUp")}
-                </Button>
-              </div>
             </nav>
+
+            {/* Desktop Actions */}
+            <div className="hidden md:flex items-center space-x-4">
+              {/* Language Selector */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="text-gray-700 hover:text-orange-600">
+                    <Globe className="mr-1 h-4 w-4" />
+                    {locale.toUpperCase()}
+                    <ChevronDown className="ml-1 h-3 w-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {languages.map((language) => (
+                    <DropdownMenuItem
+                      key={language.code}
+                      onClick={() => onLocaleChange?.(language.code)}
+                      className="cursor-pointer"
+                    >
+                      <span className="mr-2">{language.flag}</span>
+                      {language.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <Button variant="ghost" size="sm" className="hover:text-orange-600">
+                {t("bookDemo")}
+              </Button>
+              <Button
+                size="sm"
+                className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 shadow-lg"
+              >
+                {t("signUp")}
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <Button variant="ghost" size="sm" className="md:hidden" onClick={toggleMobileMenu}>
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
           </div>
-        )}
-      </div>
-    </header>
+
+          {/* Mobile Navigation */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden border-t border-orange-200 py-4">
+              <nav className="flex flex-col space-y-4">
+                {navigationItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <div className="flex flex-col space-y-2 pt-4 border-t border-orange-200">
+                  <Button variant="ghost" size="sm" className="justify-start hover:text-orange-600">
+                    {t("bookDemo")}
+                  </Button>
+                  <Button size="sm" className="justify-start bg-gradient-to-r from-orange-500 to-yellow-500">
+                    {t("signUp")}
+                  </Button>
+                </div>
+              </nav>
+            </div>
+          )}
+        </div>
+      </header>
+    </div>
   )
 }
