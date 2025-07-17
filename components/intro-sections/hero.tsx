@@ -1,6 +1,6 @@
 "use client"
-
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import { ArrowRight, Play, TrendingDown, Zap } from "lucide-react"
 import { useTranslation } from "@/lib/translations"
 
@@ -54,14 +54,16 @@ export function HeroSection({ locale = "pt" }: HeroSectionProps) {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up mb-16"
             style={{ animationDelay: "0.4s" }}
           >
-            <Button
-              size="lg"
-              className="px-8 py-4 text-lg group hover:scale-105 transition-all duration-300 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 shadow-xl"
-            >
-              <Zap className="mr-2 h-5 w-5" />
-              {t("getStarted")}
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <Link href="/dashboard">
+              <Button
+                size="lg"
+                className="px-8 py-4 text-lg group hover:scale-105 transition-all duration-300 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 shadow-xl"
+              >
+                <Zap className="mr-2 h-5 w-5" />
+                {t("getStarted")}
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
             <Button
               variant="outline"
               size="lg"
